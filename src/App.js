@@ -7,6 +7,8 @@ import {
 import Home from './Containers/Home'
 import User from './Containers/User'
 import List from './Containers/List'
+import addUser from './Containers/AddUser'
+
 import './App.css';
 
 class App extends Component {
@@ -19,11 +21,13 @@ class App extends Component {
                         <li><NavLink exact to="/">Home</NavLink> </li>
                         <li><NavLink to="/user">User</NavLink></li>
                         <li><NavLink to="/list">List</NavLink></li>
+                        <li><NavLink to="/addUser">Add user</NavLink></li>
                     </ul>
                   <div className="content">
                     <Route exact path="/" component={Home} />
                       <Route path="/user" component={User} />
                     <Route path="/list" component={List} />
+                      <Route path="/addUser" component={addUser} />
                   </div>
                 </div>
               </BrowserRouter>
