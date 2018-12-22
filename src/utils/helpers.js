@@ -19,3 +19,7 @@ export const sendUserData = (data) => {
 export const getAllUserData = () => {
     return (axios.get(`${URL}/api/user`))
 }
+
+export const getUserData = (username) => {
+    return(axios.get(`${URL}/api/user/${username}`))
+}

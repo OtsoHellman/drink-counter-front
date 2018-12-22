@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
+import { NavLink } from "react-router-dom";
 import { getAllUserData } from '../utils/helpers';
 
 
@@ -24,14 +25,16 @@ class List extends Component {
                     users: res.data
                 })
             })
-    }    
+    }
 
     render() {
         return (
             <div className="App">
                 {this.state.users.map(user => (
                     <ul key={user._id}>
-                        <li>{user.username}</li>
+                        <li>
+                            <NavLink to={"user/" + user.username}>{user.username}</NavLink>
+                        </li>
                     </ul>
                 ))}
             </div>

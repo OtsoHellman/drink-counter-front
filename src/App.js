@@ -15,22 +15,21 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-              <BrowserRouter>
-                <div>
-                    <ul className="header">
-                        <li className="front-page-li"><NavLink exact to="/">Home</NavLink> </li>
-                        <li className="front-page-li"><NavLink to="/user">User</NavLink></li>
-                        <li className="front-page-li"><NavLink to="/list">List</NavLink></li>
-                        <li className="front-page-li"><NavLink to="/addUser">Add user</NavLink></li>
-                    </ul>
-                  <div className="content">
-                    <Route exact path="/" component={Home} />
-                      <Route path="/user" component={User} />
-                    <Route path="/list" component={List} />
-                      <Route path="/addUser" component={addUser} />
-                  </div>
-                </div>
-              </BrowserRouter>
+                <BrowserRouter>
+                    <div>
+                        <ul className="header">
+                            <li className="front-page-li"><NavLink exact to="/">Home</NavLink> </li>
+                            <li className="front-page-li"><NavLink to="/list">List</NavLink></li>
+                            <li className="front-page-li"><NavLink to="/addUser">Add user</NavLink></li>
+                        </ul>
+                        <div className="content">
+                            <Route exact path="/" component={Home} />
+                            <Route path="/user" component={User} />
+                            <Route path="/list" component={List} />
+                            <Route path="/addUser" component={addUser} />
+                        </div>
+                    </div>
+                </BrowserRouter>
             </div>
         );
     }
