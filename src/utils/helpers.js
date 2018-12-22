@@ -15,3 +15,7 @@ export const sendUserData = (data) => {
             console.log(error);
         });
 }
+
+export const getAllUserData = () => {
+    return (axios.get(`${URL}/api/user`))
+}

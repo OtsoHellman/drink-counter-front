@@ -18,10 +18,10 @@ class App extends Component {
               <BrowserRouter>
                 <div>
                     <ul className="header">
-                        <li><NavLink exact to="/">Home</NavLink> </li>
-                        <li><NavLink to="/user">User</NavLink></li>
-                        <li><NavLink to="/list">List</NavLink></li>
-                        <li><NavLink to="/addUser">Add user</NavLink></li>
+                        <li className="front-page-li"><NavLink exact to="/">Home</NavLink> </li>
+                        <li className="front-page-li"><NavLink to="/user">User</NavLink></li>
+                        <li className="front-page-li"><NavLink to="/list">List</NavLink></li>
+                        <li className="front-page-li"><NavLink to="/addUser">Add user</NavLink></li>
                     </ul>
                   <div className="content">
                     <Route exact path="/" component={Home} />

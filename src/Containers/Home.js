@@ -9,11 +9,6 @@ class Home extends Component {
             <div className="App">
                 <header className="App-header">
                     <img src={require('../resources/beer.png')}  className="App-logo" alt="logo" />
-                    <h2 className={'header'}>
-                        Kännikone
-                    </h2>
-                    <p>Kännimittari daa</p>
-
                 </header>
             </div>
         );

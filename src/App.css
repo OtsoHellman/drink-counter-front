@@ -36,7 +36,7 @@
   }
 }
 
-li{
+li.front-page-li{
   background-color: cornsilk;
   border: 1px solid black;
   display:inline-block;
@@ -48,9 +48,3 @@ li a {
   text-decoration: none;
   color: black;
 }
-
-.chart {
-  max-width: 200px;
-  max-height: 200px;
-}
-
