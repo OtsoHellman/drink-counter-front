@@ -10,9 +10,9 @@ class List extends Component {
         }
     }
 
-    handleUserNameChange = (e) => {
+    handleUsernameChange = (e) => {
         this.setState({
-            userName: e.target.value
+            username: e.target.value
         })
     }
 
@@ -31,7 +31,7 @@ class List extends Component {
 
     submitForm = () => {
         const userData = {
-            userName: this.state.userName,
+            username: this.state.username,
             mass: this.state.mass,
             gender: this.state.isMale ? 'male' : 'female',
         }
@@ -44,7 +44,7 @@ class List extends Component {
                 <h2>Add user</h2>
                     <label>
                         Username:
-                        <input type="text" name="name" onChange={this.handleUserNameChange}/>
+                        <input type="text" name="name" onChange={this.handleUsernameChange}/>
                     </label>
                     <label>
                         Mass:

@@ -1,8 +1,10 @@
 import axios from 'axios';
 
+const URL = 'http://localhost:3001'
+
 export const sendUserData = (data) => {
-    axios.post('api/user', {
-        userName: data.userName,
+    axios.post(`${URL}/api/user`, {
+        username: data.username,
         mass: data.mass,
         gender: data.gender
     })
