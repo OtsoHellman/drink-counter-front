@@ -16,6 +16,18 @@ export const sendUserData = (data) => {
         });
 }
 
+export const addDrinkByUsername = (username) => {
+    return axios.post(`${URL}/api/drink`, {
+        username
+    })
+        .then(function (response) {
+            console.log(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
+
 export const getAllUserData = () => {
     return (axios.get(`${URL}/api/user`))
 }
