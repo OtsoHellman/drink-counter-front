@@ -34,5 +34,5 @@ export const getAllUserData = () => {
 }
 
 export const getUserData = (username) => {
-    return(axios.get(`${URL}/api/user/${username}`))
+    return(axios.get(`${URL}/api/user/getUser/${username}`))
 }
