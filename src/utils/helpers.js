@@ -16,9 +16,10 @@ export const sendUserData = (data) => {
         });
 }
 
-export const addDrinkByUsername = (username) => {
+export const addDrinkByUsername = (username, drinkSize) => {
     return axios.post(`${URL}/api/drink`, {
-        username
+        username,
+        drinkSize
     })
         .then(function (response) {
             console.log(response);
