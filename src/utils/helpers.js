@@ -33,6 +33,10 @@ export const getAllUserData = () => {
     return (axios.get(`${URL}/api/user`))
 }
 
+export const getAllWithKonni = () => {
+    return(axios.get(`${URL}/api/user/allWithKonni`))
+}
+
 export const getUserData = (username) => {
     return(axios.get(`${URL}/api/user/getUser/${username}`))
 }
