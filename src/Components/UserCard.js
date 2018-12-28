@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const styles = {
   card: {
@@ -28,7 +28,7 @@ const SimpleCard = (props) => {
   const { classes } = props;
   return (
     <Card className={classes.card}>
-      <CardContent component={Link} to={"user/" + props.user.username}>
+      <CardContent component={NavLink} to={"user/" + props.user.username}>
         <Typography variant="h5" component="h2">
             {props.user.username}
         </Typography>

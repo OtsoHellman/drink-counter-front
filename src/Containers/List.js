@@ -1,13 +1,24 @@
 import React, { Component } from 'react';
 import '../App.css';
-import { NavLink } from "react-router-dom";
 import { getAllUserData } from '../utils/helpers';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 import UserCard from '../Components/UserCard';
-import User from './User';
+import { withStyles } from '@material-ui/core/styles';
+import { NavLink } from "react-router-dom";
+
+const styles = theme => ({
+    fab: {
+      position: 'absolute',
+      bottom: theme.spacing.unit * 2,
+      right: theme.spacing.unit * 2,
+    },
+  });
+
 class List extends Component {
 
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             users: []
         }
@@ -27,20 +38,17 @@ class List extends Component {
     }
 
     render() {
+        const { classes } = this.props;
         return (
             <div className="App">
                 {this.state.users.map(user => (
-                    <UserCard key={user.username} user={user}/>
+                    <UserCard key={user.username} user={user} />
                 ))}
+                <Fab color="primary" aria-label="Add" className={classes.fab} component={NavLink} to="/addUser" >
+                    <AddIcon />
+                </Fab>
             </div>
         );
     }
 }
-export default List;
-
-
-//<ul key={user._id}>
-//<li>
-//    <NavLink to={"user/" + user.username}>{user.username}</NavLink>
-//</li>
-//</ul>
+export default withStyles(styles, { withTheme: true })(List);
