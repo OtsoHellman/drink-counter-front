@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import '../App.css';
 import { NavLink } from "react-router-dom";
 import { getAllUserData } from '../utils/helpers';
-
-
-
+import UserCard from '../Components/UserCard';
+import User from './User';
 class List extends Component {
 
     constructor() {
@@ -31,16 +30,17 @@ class List extends Component {
         return (
             <div className="App">
                 {this.state.users.map(user => (
-                    <ul key={user._id}>
-                        <li>
-                            <NavLink to={"user/" + user.username}>{user.username}</NavLink>
-                        </li>
-                    </ul>
+                    <UserCard key={user.username} user={user}/>
                 ))}
             </div>
         );
     }
 }
-//{this.state.users}
-//{this.state.persons.map(person => <Person key={person.id} person={person} onDelete={this.deletePerson} />)}
 export default List;
+
+
+//<ul key={user._id}>
+//<li>
+//    <NavLink to={"user/" + user.username}>{user.username}</NavLink>
+//</li>
+//</ul>

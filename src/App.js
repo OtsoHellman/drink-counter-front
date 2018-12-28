@@ -8,6 +8,7 @@ import Home from './Containers/Home'
 import User from './Containers/User'
 import List from './Containers/List'
 import addUser from './Containers/AddUser'
+import Menu from './Components/Menu'
 
 import './App.css';
 
@@ -17,11 +18,7 @@ class App extends Component {
             <div className="App">
                 <BrowserRouter>
                     <div>
-                        <ul className="header">
-                            <li className="front-page-li"><NavLink exact to="/">Home</NavLink> </li>
-                            <li className="front-page-li"><NavLink to="/list">List</NavLink></li>
-                            <li className="front-page-li"><NavLink to="/addUser">Add user</NavLink></li>
-                        </ul>
+                        <Menu/>
                         <div className="content">
                             <Route exact path="/" component={Home} />
                             <Route path="/user" component={User} />
