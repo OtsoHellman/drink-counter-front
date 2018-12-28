@@ -9,36 +9,26 @@ import {
     YAxis
 } from 'react-vis';
 import '../App.css';
-import { getAllWithKonni } from '../utils/helpers';
 import socketIOClient from "socket.io-client";
+
+const URL = 'http://localhost:3001'
+const socket = socketIOClient(URL);
 
 class Home extends Component {
 
     constructor() {
         super()
-        this.state = {
-            URL: 'http://localhost:3001',
-            response: [],
-            testi: {}
-        }
+        this.state = {}
     }
 
     componentDidMount() {
-        const socket = socketIOClient(this.state.URL);
-        socket.on("toinen", res => {
-            console.log(res.data)
+        socket.on("allWithKonni", res => {
             this.setState({ data: res.data })
         });
-        this.getData()
     }
 
-    getData = () => {
-        getAllWithKonni()
-            .then((res) => {
-                this.setState({
-                    data: res.data
-                })
-            })
+    componentWillUnmount() {
+        socket.close()
     }
 
     render() {
