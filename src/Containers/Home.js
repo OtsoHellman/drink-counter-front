@@ -12,7 +12,7 @@ import '../App.css';
 import socketIOClient from "socket.io-client";
 
 const URL = 'http://localhost:3001'
-const socket = socketIOClient(URL);
+let socket;
 
 class Home extends Component {
 
@@ -22,6 +22,7 @@ class Home extends Component {
     }
 
     componentDidMount() {
+        socket = socketIOClient(URL);
         socket.on("allWithKonni", res => {
             this.setState({ data: res.data })
         });
