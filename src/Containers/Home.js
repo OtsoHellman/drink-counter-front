@@ -10,15 +10,25 @@ import {
 } from 'react-vis';
 import '../App.css';
 import { getAllWithKonni } from '../utils/helpers';
+import socketIOClient from "socket.io-client";
 
 class Home extends Component {
 
     constructor() {
         super()
-        this.state = {}
+        this.state = {
+            URL: 'http://localhost:3001',
+            response: [],
+            testi: {}
+        }
     }
 
     componentDidMount() {
+        const socket = socketIOClient(this.state.URL);
+        socket.on("toinen", res => {
+            console.log(res.data)
+            this.setState({ data: res.data })
+        });
         this.getData()
     }
 
@@ -50,7 +60,6 @@ class Home extends Component {
                             data={this.state.data}
                         />
                     </XYPlot>
-
                 </div>
             </div>
         );
