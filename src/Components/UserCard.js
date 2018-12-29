@@ -9,7 +9,7 @@ import { NavLink } from "react-router-dom";
 const styles = {
   card: {
     minWidth: 275,
-    margin: 10
+    margin: '20px 10px'
   },
   bullet: {
     display: 'inline-block',
@@ -28,7 +28,7 @@ const SimpleCard = (props) => {
   const { classes } = props;
   return (
     <Card className={classes.card}>
-      <CardContent component={NavLink} to={"user/" + props.user.username}>
+      <CardContent style={{ textDecoration: 'none' }} component={NavLink} to={"user/" + props.user.username}>
         <Typography variant="h5" component="h2">
             {props.user.username}
         </Typography>
