@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const URL = 'http://3.122.133.98:3002'
+const URL = ':3002'
 
 export const sendUserData = (data) => {
     return axios.post(`${URL}/api/user`, {
