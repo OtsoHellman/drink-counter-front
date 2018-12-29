@@ -80,6 +80,9 @@ class User extends Component {
                 <Button variant="contained" className={classes.button} color="primary" onClick={() => this.addDrink(1.5)}>
                     0.50l
                 </Button>
+                <Button variant="contained" className={classes.button} color="primary" onClick={() => this.addDrink(1.0)}>
+                    12cl
+                </Button>
                 <Grid item xs={12}>
                     <TextField
                         id="drinkSize"
