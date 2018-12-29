@@ -1,9 +1,8 @@
 import axios from 'axios';
-
-const URL = 'http://3.122.133.98:3002'
+import { API_URL } from '../config';
 
 export const sendUserData = (data) => {
-    return axios.post(`${URL}/api/user`, {
+    return axios.post(`${API_URL}/api/user`, {
         username: data.username,
         mass: data.mass,
         gender: data.gender
@@ -19,7 +18,7 @@ export const sendUserData = (data) => {
 }
 
 export const addDrinkByUsername = (username, drinkSize) => {
-    return axios.post(`${URL}/api/drink`, {
+    return axios.post(`${API_URL}/api/drink`, {
         username,
         drinkSize
     })
@@ -32,13 +31,13 @@ export const addDrinkByUsername = (username, drinkSize) => {
 }
 
 export const getAllUserData = () => {
-    return (axios.get(`${URL}/api/user`))
+    return (axios.get(`${API_URL}/api/user`))
 }
 
 export const getAllWithKonni = () => {
-    return axios.get(`${URL}/api/user/allWithKonni`)
+    return axios.get(`${API_URL}/api/user/allWithKonni`)
 }
 
 export const getUserData = (username) => {
-    return axios.get(`${URL}/api/user/getUser/${username}`)
+    return axios.get(`${API_URL}/api/user/getUser/${username}`)
 }

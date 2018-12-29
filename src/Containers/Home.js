@@ -11,7 +11,8 @@ import {
 import '../App.css';
 import socketIOClient from "socket.io-client";
 
-const URL = 'http://3.122.133.98:3002'
+import { API_URL } from '../config';
+
 let socket;
 
 class Home extends Component {
@@ -22,7 +23,7 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        socket = socketIOClient(URL);
+        socket = socketIOClient(API_URL);
         socket.on("allWithKonni", res => {
             this.setState({ data: res.data })
         });

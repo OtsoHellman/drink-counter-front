@@ -1,0 +1,1 @@
+export const API_URL = 'https://konni.munax.club:3002'
