@@ -3,16 +3,18 @@ import axios from 'axios';
 const URL = 'http://localhost:3001'
 
 export const sendUserData = (data) => {
-    axios.post(`${URL}/api/user`, {
+    return axios.post(`${URL}/api/user`, {
         username: data.username,
         mass: data.mass,
         gender: data.gender
     })
         .then(function (response) {
             console.log(response);
+            return response
         })
         .catch(function (error) {
             console.log(error);
+            return error
         });
 }
 
@@ -34,9 +36,9 @@ export const getAllUserData = () => {
 }
 
 export const getAllWithKonni = () => {
-    return(axios.get(`${URL}/api/user/allWithKonni`))
+    return axios.get(`${URL}/api/user/allWithKonni`)
 }
 
 export const getUserData = (username) => {
-    return(axios.get(`${URL}/api/user/getUser/${username}`))
+    return axios.get(`${URL}/api/user/getUser/${username}`)
 }

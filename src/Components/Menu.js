@@ -48,21 +48,19 @@ class FullWidthTabs extends React.Component {
         const { classes } = this.props;
 
         return (
-            <div>
-                <AppBar position="static">
-                    <Tabs
-                        className={classes.root}
-                        value={this.state.value}
-                        onChange={this.handleChange}
-                        indicatorColor="primary"
-                        textColor="primary"
-                        fullWidth
-                    >
-                        <Tab value="/" label="Home" component={NavLink} to="/" />
-                        <Tab value="/list" label="Users" component={NavLink} to="/list" />
-                    </Tabs>
-                </AppBar>
-            </div>
+            <AppBar position="fixed">
+                <Tabs
+                    className={classes.root}
+                    value={this.state.value}
+                    onChange={this.handleChange}
+                    indicatorColor="primary"
+                    textColor="primary"
+                    fullWidth
+                >
+                    <Tab value="/" label="Home" component={NavLink} to="/" />
+                    <Tab value="/list" label="Users" component={NavLink} to="/list" />
+                </Tabs>
+            </AppBar>
         );
     }
 }

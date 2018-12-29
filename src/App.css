@@ -1,16 +1,6 @@
 .App {
   text-align: center;
-}
-
-.App-header {
-  display: flex;
-  flex-direction: column;
-  font-size: calc(10px + 2vmin);
-}
-
-.header{
-  color: black;
-  margin-top: 2em;
+  margin-top: 48px;
 }
 
 .App-link {
