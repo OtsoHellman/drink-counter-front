@@ -29,8 +29,12 @@ const styles = theme => ({
 
 class FullWidthTabs extends React.Component {
     state = {
-        value: 0,
+        value: '/',
     };
+
+    componentWillMount() {
+        this.setState({ value: window.location.pathname });
+    }
 
     handleChange = (event, value) => {
         this.setState({ value });
@@ -54,8 +58,8 @@ class FullWidthTabs extends React.Component {
                         textColor="primary"
                         fullWidth
                     >
-                        <Tab label="Home" component={NavLink} to="/" />
-                        <Tab label="Users" component={NavLink} to="/list" />
+                        <Tab value="/" label="Home" component={NavLink} to="/" />
+                        <Tab value="/list" label="Users" component={NavLink} to="/list" />
                     </Tabs>
                 </AppBar>
             </div>
