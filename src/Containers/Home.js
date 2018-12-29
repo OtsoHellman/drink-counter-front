@@ -11,7 +11,7 @@ import {
 import '../App.css';
 import socketIOClient from "socket.io-client";
 
-const URL = 'http://localhost:3001'
+const URL = 'http://3.122.133.98:3002'
 let socket;
 
 class Home extends Component {
