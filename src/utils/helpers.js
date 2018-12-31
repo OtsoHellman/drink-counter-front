@@ -17,10 +17,11 @@ export const sendUserData = (data) => {
         });
 }
 
-export const addDrinkByUsername = (username, drinkSize) => {
+export const addDrinkByUsername = (username, drinkSize, drinkType) => {
     return axios.post(`${API_URL}/api/drink`, {
         username,
-        drinkSize
+        drinkSize,
+        drinkType
     })
         .then(function (response) {
             console.log(response);

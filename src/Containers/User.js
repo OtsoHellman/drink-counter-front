@@ -20,6 +20,10 @@ import { getUserData, addDrinkByUsername } from '../utils/helpers';
 
 
 const styles = theme => ({
+    container: {
+        display: 'flex',
+        flexWrap: 'wrap',
+    },
     button: {
         margin: theme.spacing.unit,
     },
@@ -133,12 +137,12 @@ class User extends Component {
             })
     }
 
-    addDrink = (drinkSize) => {
+    addDrink = (drinkSize, drinkType) => {
         this.setState({
             successfulSnackBarOpen: false,
             errorSnackBarOpen: false
         })
-        addDrinkByUsername(this.props.location.pathname.substring(6), drinkSize)
+        addDrinkByUsername(this.props.location.pathname.substring(6), drinkSize, drinkType)
             .then((asd) => {
                 if (asd.status === 200) {
                     this.setState({
@@ -161,16 +165,15 @@ class User extends Component {
         })
     }
 
-    submitCustomSizeDrink = () => {
-        this.addDrink(this.state.drinkSize)
+    handleDrinkTypeChange = (e) => {
+        this.setState({
+            drinkType: e.target.value
+        })
     }
 
-
-    handleChange = name => event => {
-        this.setState({
-            [name]: event.target.value,
-        });
-    };
+    submitCustomSizeDrink = () => {
+        this.addDrink(this.state.drinkSize, this.state.drinkType)
+    }
 
     handleSuccessfulClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -194,37 +197,65 @@ class User extends Component {
         const { classes } = this.props;
         return (
             <div>
-                <Grid item xs={12}>
-                    <Paper className={'userTitle'}><h2>{this.state.username}</h2></Paper>
-                    <p>Gender: {this.state.gender}</p>
-                    <p>Könni: {this.state.konni.toFixed(2)}</p>
-                    <Button variant="contained" className={classes.button} color="primary" onClick={() => this.addDrink(1.0)}>
-                        0.33l
-                </Button>
-                    <Button variant="contained" className={classes.button} color="primary" onClick={() => this.addDrink(1.5)}>
-                        0.50l
-                </Button>
-                    <Button variant="contained" className={classes.button} color="primary" onClick={() => this.addDrink(1.0)}>
-                        12cl
-                </Button>
-                    <Button variant="contained" className={classes.button} color="secondary" onClick={() => this.addDrink(1.0)}>
-                        glögi
-                </Button>
+                <div>
                     <Grid item xs={12}>
-                        <TextField
-                            id="drinkSize"
-                            label="Custom drink size"
-                            className={classes.textField}
-                            onChange={this.handleDrinkSizeChange}
-                            margin="normal"
-                            variant="outlined"
-                        />
-                        <Button variant="contained" className={classes.submitButton} onClick={this.submitCustomSizeDrink}>
-                            Submit
-                    </Button>
+                        <Paper className={'userTitle'}><h2>{this.state.username}</h2></Paper>
+                        <p>Gender: {this.state.gender}</p>
+                        <p>Könni: {this.state.konni.toFixed(2)}</p>
+                        <Button variant="contained" className={classes.button} color="primary" onClick={() => this.addDrink(1.0, '0.33l Olut')}>
+                            0.33l Olut
+                </Button>
+                        <Button variant="contained" className={classes.button} color="primary" onClick={() => this.addDrink(1.5, '0.5l Olut')}>
+                            0.5l Olut
+                </Button>
+                        <Button variant="contained" className={classes.button} color="primary" onClick={() => this.addDrink(1.0, 'Lonkero')}>
+                            Lonkero
+                </Button>
+                        <Button variant="contained" className={classes.button} color="primary" onClick={() => this.addDrink(1.0, 'Siideri')}>
+                            Siideri
+                </Button>
+                        <Button variant="contained" className={classes.button} color="primary" onClick={() => this.addDrink(1.0, '12cl Viini')}>
+                            12cl Viini
+                </Button>
+                        <Button variant="contained" className={classes.button} color="primary" onClick={() => this.addDrink(1.33, '16cl Viini')}>
+                            16cl Viini
+                </Button>
+                        <Button variant="contained" className={classes.button} color="primary" onClick={() => this.addDrink(1.33, '4cl Shotti')}>
+                            4cl Shotti
+                </Button>
+                        <Button variant="contained" className={classes.button} color="primary" onClick={() => this.addDrink(1.33, 'Viskisuihku')}>
+                            Viskisuihku
+                </Button>
+                        <Button variant="contained" className={classes.button} color="secondary" onClick={() => this.addDrink(1.0, 'Glögi')}>
+                            glögi
+                </Button>
                     </Grid>
-                </Grid>
+                </div>
+                <form className={classes.container} >
+                    <TextField
+                        fullWidth
+                        id="drinkType"
+                        label="Custom drink name"
+                        className={classes.textField}
+                        onChange={this.handleDrinkTypeChange}
+                        margin="dense"
+                        variant="filled"
+                    />
 
+                    <TextField
+                        fullWidth
+                        id="drinkSize"
+                        label="Drink size in alcohol units"
+                        onChange={this.handleDrinkSizeChange}
+                        type="number"
+                        className={classes.textField}
+                        margin="dense"
+                        variant="filled"
+                    />
+                    <Button variant="contained" fullWidth className={classes.submitButton} onClick={this.submitCustomSizeDrink}>
+                        Submit
+                            </Button>
+                </form>
                 <Snackbar
                     anchorOrigin={{
                         vertical: 'bottom',
