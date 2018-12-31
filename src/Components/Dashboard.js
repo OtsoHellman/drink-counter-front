@@ -9,17 +9,8 @@ import {
     YAxis
 } from 'react-vis';
 import '../App.css';
-import socketIOClient from "socket.io-client";
-
-import { API_URL } from '../config';
-
-let socket;
 
 class Dashboard extends Component {
-
-    constructor(props) {
-        super()
-    }
 
     render() {
         return (
