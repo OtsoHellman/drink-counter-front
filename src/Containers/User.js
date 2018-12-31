@@ -118,7 +118,9 @@ class User extends Component {
             gender: '',
             konni: 0,
             successfulSnackBarOpen: false,
-            errorSnackBarOpen: false
+            errorSnackBarOpen: false,
+            drinkMap: {},
+            keysSorted: []
         }
     }
 
@@ -132,7 +134,9 @@ class User extends Component {
                 this.setState({
                     username: res.data.username,
                     gender: res.data.gender,
-                    konni: res.data.konni
+                    konni: res.data.konni,
+                    drinkMap: res.data.drinkMap,
+                    keysSorted: res.data.keysSorted
                 })
             })
     }
@@ -202,6 +206,10 @@ class User extends Component {
                         <Paper className={'userTitle'}><h2>{this.state.username}</h2></Paper>
                         <p>Gender: {this.state.gender}</p>
                         <p>Könni: {this.state.konni.toFixed(2)}</p>
+                        {this.state.keysSorted.length <= 0 ? '' : <h3>Favourite drinks:</h3>}
+                        {this.state.keysSorted.map(key => {
+                            return <p key={key}>{key}: {this.state.drinkMap[key]}</p>
+                        })}
                         <Button variant="contained" className={classes.button} color="primary" onClick={() => this.addDrink(1.0, '0.33l Olut')}>
                             0.33l Olut
                 </Button>

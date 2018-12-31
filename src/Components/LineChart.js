@@ -64,8 +64,7 @@ class LineChart extends Component {
                   })
                 }
                 }
-                onSeriesMouseOut={() =>
-                  setTimeout(() => {
+                onSeriesMouseOut={() =>{
                     if (this.state.highlightSeries === d.username) {
                       this.setState({
                         highlightSeries: null,
@@ -73,7 +72,7 @@ class LineChart extends Component {
                         highlightTipY: null
                       })
                     }
-                  }, 1000)
+                  }
                 }
                 strokeWidth={d.username === this.state.highlightSeries ? 3 : 1}
               />)
