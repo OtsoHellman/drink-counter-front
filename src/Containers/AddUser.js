@@ -129,7 +129,7 @@ class addUser extends Component {
         super(props)
         this.state = {
             username: '',
-            mass: 0,
+            mass: '',
             gender: 'other',
             successfulSnackBarOpen: false,
             errorSnackBarOpen: false

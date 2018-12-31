@@ -32,7 +32,9 @@ class User extends Component {
     constructor(props) {
         super()
         this.state = {
-            userdata: []
+            username: '',
+            gender: '',
+            konni: 0
         }
     }
 
@@ -44,7 +46,9 @@ class User extends Component {
         getUserData(this.props.location.pathname.substring(6))
             .then((res) => {
                 this.setState({
-                    userdata: res.data
+                    username: res.data.username,
+                    gender: res.data.gender,
+                    konni: res.data.konni
                 })
             })
     }
@@ -71,9 +75,9 @@ class User extends Component {
         return (
 
             <Grid item xs={12}>
-                <Paper className={'userTitle'}><h2>{this.state.userdata.username}</h2></Paper>
-                <p>Gender: {this.state.userdata.gender}</p>
-                <p>Könni: {this.state.userdata.konni}</p>
+                <Paper className={'userTitle'}><h2>{this.state.username}</h2></Paper>
+                <p>Gender: {this.state.gender}</p>
+                <p>Könni: {this.state.konni.toFixed(2)}</p>
                 <Button variant="contained" className={classes.button} color="primary" onClick={() => this.addDrink(1.0)}>
                     0.33l
                 </Button>

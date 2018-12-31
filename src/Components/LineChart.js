@@ -21,37 +21,84 @@
 import React, { Component } from 'react';
 
 import {
-  XYPlot,
+  FlexibleWidthXYPlot,
   YAxis,
   HorizontalGridLines,
   VerticalGridLines,
   LineSeries,
-  DiscreteColorLegend
+  DiscreteColorLegend,
+  Hint,
+  XAxis
 } from 'react-vis';
 import 'react-vis/dist/style.css';
 import '../App.css';
 
 
 class LineChart extends Component {
+  state = {
+    highlightSeries: null,
+    highlightTipX: null,
+    highlightTipY: null
+  }
+
   render() {
+
     return (
-      <div className="App">
-        <div className="chart-container">
-          <XYPlot width={300} height={300}>
+        <div className="App">
+          <FlexibleWidthXYPlot height={500} xType="time">
             <HorizontalGridLines />
             <VerticalGridLines />
+            <XAxis />
             <YAxis />
             {this.props.timestamps.map(d => {
               return (<LineSeries
                 key={d.username}
                 data={d.graphData}
-                curve={'curveMonotoneX'} />)
+                label={d.username}
+                curve={'curveMonotoneX'}
+                onSeriesClick={() => {
+                  this.setState({
+                    highlightSeries: d.username,
+                    highlightTipX: d.graphData[d.graphData.length - 1].x,
+                    highlightTipY: d.graphData[d.graphData.length - 1].y
+                  })
+                }
+                }
+                onSeriesMouseOut={() =>
+                  setTimeout(() => {
+                    if (this.state.highlightSeries === d.username) {
+                      this.setState({
+                        highlightSeries: null,
+                        highlightTipX: null,
+                        highlightTipY: null
+                      })
+                    }
+                  }, 1000)
+                }
+                strokeWidth={d.username === this.state.highlightSeries ? 3 : 1}
+              />)
             })}
-            <DiscreteColorLegend items={this.props.timestamps.map(d => d.username)} />
-          </XYPlot>
-
+            {
+              this.state.highlightSeries && <Hint
+                value={{ y: this.state.highlightTipY, x: this.state.highlightTipX, user: this.state.highlightSeries}}
+                format={(data) => (
+                  [{
+                    title: "user",
+                    value: this.state.highlightSeries
+                  },
+                  {
+                    title: "könni",
+                    value: this.state.highlightTipY.toFixed(2)
+                  }
+                ]
+                )}>
+              </Hint>
+            }
+            <DiscreteColorLegend items={this.props.timestamps.map(d => (
+              `${d.username} ${d.graphData[d.graphData.length - 1].y.toFixed(2)}`
+            ))} />
+          </FlexibleWidthXYPlot >
         </div>
-      </div>
     )
   }
 }
