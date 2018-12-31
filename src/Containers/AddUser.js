@@ -142,6 +142,10 @@ class addUser extends Component {
             mass: this.state.mass,
             gender: this.state.gender,
         }
+        this.setState({
+            successfulSnackBarOpen: false,
+            errorSnackBarOpen: false
+        })
         sendUserData(userData)
             .then((asd) => {
                 if (asd.status === 200) {
@@ -243,7 +247,7 @@ class addUser extends Component {
                                 horizontal: 'left',
                             }}
                             open={this.state.successfulSnackBarOpen}
-                            autoHideDuration={5000}
+                            autoHideDuration={3000}
                             onClose={this.handleSuccessfulClose}
                         >
                             <MySnackbarContentWrapper
@@ -260,7 +264,7 @@ class addUser extends Component {
                                 horizontal: 'left',
                             }}
                             open={this.state.errorSnackBarOpen}
-                            autoHideDuration={5000}
+                            autoHideDuration={3000}
                             onClose={this.handleErrorClose}
                         >
                             <MySnackbarContentWrapper
