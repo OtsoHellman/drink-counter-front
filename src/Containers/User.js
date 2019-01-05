@@ -223,7 +223,7 @@ class User extends Component {
                         <p>Könni: {this.state.konni.toFixed(2)}</p>
                         {this.state.keysSorted.length <= 0 ? '' : <h3>Favourite drinks:</h3>}
                         {this.state.keysSorted.map(key => {
-                            return <p key={key}>{this.state.drinkTypes.find(drinkObject => drinkObject._id === key).drinkName}: {this.state.drinkMap[key]}</p>
+                            return <p key={key}>{key}: {this.state.drinkMap[key]}</p>
                         })}
 
                         {this.state.drinkTypes.map(drinkType => {
