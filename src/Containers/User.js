@@ -16,7 +16,7 @@ import PropTypes from 'prop-types';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 
-import { getUserData, addDrinkByUsername } from '../utils/helpers';
+import { getUserData, addDrinkByUsername, getDrinkTypes } from '../utils/helpers';
 
 
 const styles = theme => ({
@@ -120,12 +120,23 @@ class User extends Component {
             successfulSnackBarOpen: false,
             errorSnackBarOpen: false,
             drinkMap: {},
-            keysSorted: []
+            keysSorted: [],
+            drinkTypes: []
         }
     }
 
     componentDidMount() {
         this.getUserData()
+        this.getDrinkData()
+    }
+
+    getDrinkData = () => {
+        getDrinkTypes()
+            .then((res) => {
+                this.setState({
+                    drinkTypes: res.data
+                })
+            })
     }
 
     getUserData = () => {
@@ -141,12 +152,12 @@ class User extends Component {
             })
     }
 
-    addDrink = (drinkSize, drinkType) => {
+    addDrink = (drinkTypeId) => {
         this.setState({
             successfulSnackBarOpen: false,
             errorSnackBarOpen: false
         })
-        addDrinkByUsername(this.props.location.pathname.substring(6), drinkSize, drinkType)
+        addDrinkByUsername(this.props.location.pathname.substring(6), drinkTypeId)
             .then((asd) => {
                 if (asd.status === 200) {
                     this.setState({
@@ -169,14 +180,14 @@ class User extends Component {
         })
     }
 
-    handleDrinkTypeChange = (e) => {
+    handledrinkNameChange = (e) => {
         this.setState({
-            drinkType: e.target.value
+            drinkName: e.target.value
         })
     }
 
     submitCustomSizeDrink = () => {
-        this.addDrink(this.state.drinkSize, this.state.drinkType)
+        this.addDrink(this.state.drinkName)
     }
 
     handleSuccessfulClose = (event, reason) => {
@@ -208,44 +219,29 @@ class User extends Component {
                         <p>Könni: {this.state.konni.toFixed(2)}</p>
                         {this.state.keysSorted.length <= 0 ? '' : <h3>Favourite drinks:</h3>}
                         {this.state.keysSorted.map(key => {
-                            return <p key={key}>{key}: {this.state.drinkMap[key]}</p>
+                            return <p key={key}>{this.state.drinkTypes.find(drinkObject => drinkObject._id === key).drinkName}: {this.state.drinkMap[key]}</p>
                         })}
-                        <Button variant="contained" className={classes.button} color="primary" onClick={() => this.addDrink(1.0, '0.33l Olut')}>
-                            0.33l Olut
-                </Button>
-                        <Button variant="contained" className={classes.button} color="primary" onClick={() => this.addDrink(1.5, '0.5l Olut')}>
-                            0.5l Olut
-                </Button>
-                        <Button variant="contained" className={classes.button} color="primary" onClick={() => this.addDrink(1.0, 'Lonkero')}>
-                            Lonkero
-                </Button>
-                        <Button variant="contained" className={classes.button} color="primary" onClick={() => this.addDrink(1.0, 'Siideri')}>
-                            Siideri
-                </Button>
-                        <Button variant="contained" className={classes.button} color="primary" onClick={() => this.addDrink(1.0, '12cl Viini')}>
-                            12cl Viini
-                </Button>
-                        <Button variant="contained" className={classes.button} color="primary" onClick={() => this.addDrink(1.33, '16cl Viini')}>
-                            16cl Viini
-                </Button>
-                        <Button variant="contained" className={classes.button} color="primary" onClick={() => this.addDrink(1.33, '4cl Shotti')}>
-                            4cl Shotti
-                </Button>
-                        <Button variant="contained" className={classes.button} color="primary" onClick={() => this.addDrink(1.33, 'Viskisuihku')}>
-                            Viskisuihku
-                </Button>
-                        <Button variant="contained" className={classes.button} color="secondary" onClick={() => this.addDrink(1.0, 'Glögi')}>
-                            glögi
-                </Button>
+
+                        {this.state.drinkTypes.map(drinkType => {
+                            return <Button
+                                key={drinkType._id}
+                                variant="contained"
+                                className={classes.button}
+                                color="primary"
+                                onClick={() => this.addDrink(drinkType._id)}>
+                                {drinkType.drinkName}
+                            </Button>
+                        })}
+
                     </Grid>
                 </div>
                 <form className={classes.container} >
                     <TextField
                         fullWidth
-                        id="drinkType"
+                        id="drinkName"
                         label="Custom drink name"
                         className={classes.textField}
-                        onChange={this.handleDrinkTypeChange}
+                        onChange={this.handledrinkNameChange}
                         margin="dense"
                         variant="filled"
                     />

@@ -17,11 +17,10 @@ export const sendUserData = (data) => {
         });
 }
 
-export const addDrinkByUsername = (username, drinkSize, drinkType) => {
+export const addDrinkByUsername = (username, drinkTypeId) => {
     return axios.post(`${API_URL}/api/drink`, {
         username,
-        drinkSize,
-        drinkType
+        drinkTypeId
     })
         .then(function (response) {
             console.log(response);
@@ -43,4 +42,8 @@ export const getAllWithKonni = () => {
 
 export const getUserData = (username) => {
     return axios.get(`${API_URL}/api/user/getUser/${username}`)
+}
+
+export const getDrinkTypes = () => {
+    return axios.get(`${API_URL}/api/drinkType`)
 }
