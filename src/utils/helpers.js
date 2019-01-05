@@ -32,6 +32,21 @@ export const addDrinkByUsername = (username, drinkTypeId) => {
         });
 }
 
+export const addDrinkType = (drinkName, drinkSize) => {
+    return axios.post(`${API_URL}/api/drinkType`, {
+        drinkName,
+        drinkSize
+    })
+        .then(function (response) {
+            console.log(response);
+            return response
+        })
+        .catch(function (error) {
+            console.log(error);
+            return error
+        });
+}
+
 export const getAllUserData = () => {
     return (axios.get(`${API_URL}/api/user`))
 }
