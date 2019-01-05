@@ -16,7 +16,7 @@ import PropTypes from 'prop-types';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 
-import { getUserData, addDrinkByUsername, getDrinkTypes } from '../utils/helpers';
+import { getUserData, addDrinkByUsername, getDrinkTypes, addDrinkType } from '../utils/helpers';
 
 
 const styles = theme => ({
@@ -186,8 +186,12 @@ class User extends Component {
         })
     }
 
-    submitCustomSizeDrink = () => {
-        this.addDrink(this.state.drinkName)
+    addDrinkType = () => {
+        addDrinkType(this.state.drinkName, this.state.drinkSize)
+            .then(() => {
+                this.getUserData()
+                this.getDrinkData()
+            })
     }
 
     handleSuccessfulClose = (event, reason) => {
@@ -256,7 +260,7 @@ class User extends Component {
                         margin="dense"
                         variant="filled"
                     />
-                    <Button variant="contained" fullWidth className={classes.submitButton} onClick={this.submitCustomSizeDrink}>
+                    <Button variant="contained" fullWidth className={classes.submitButton} onClick={this.addDrinkType}>
                         Submit
                             </Button>
                 </form>
