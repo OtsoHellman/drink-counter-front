@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import StatusSnackBar from '../Components/StatusSnackBar';
+import MenuItem from '@material-ui/core/MenuItem';
 
 import { getUserData, addDrinkByUsername, getDrinkTypes, addDrinkType } from '../utils/helpers';
 
@@ -25,12 +26,61 @@ const styles = theme => ({
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
     },
-
+    dense: {
+        marginTop: 16,
+    },
     submitButton: {
         marginTop: 16,
         margin: theme.spacing.unit,
     }
 });
+
+const timeDeltas = [
+    {
+        label: 'now',
+        value: 0,
+    },
+    {
+        label: '15 minutes ago',
+        value: 15 * 60 * 1000,
+    },
+    {
+        label: '30 minutes ago',
+        value: 30 * 60 * 1000,
+    },
+    {
+        label: '45 minutes ago',
+        value: 45 * 60 * 1000,
+    },
+    {
+        label: '1 hour ago',
+        value: 60 * 60 * 1000,
+    },
+    {
+        label: '1.5 hours ago',
+        value: 90 * 60 * 1000,
+    },
+    {
+        label: '2 hours ago',
+        value: 120 * 60 * 1000,
+    },
+    {
+        label: '3 hours ago',
+        value: 180 * 60 * 1000,
+    },
+    {
+        label: '4 hours ago',
+        value: 240 * 60 * 1000,
+    },
+    {
+        label: '5 hours ago',
+        value: 300 * 60 * 1000,
+    },
+    {
+        label: '6 hours ago',
+        value: 360 * 60 * 1000,
+    },
+];
 
 class User extends Component {
 
@@ -44,7 +94,8 @@ class User extends Component {
             errorSnackBarOpen: false,
             drinkMap: {},
             keysSorted: [],
-            drinkTypes: []
+            drinkTypes: [],
+            timeDelta: 0
         }
     }
 
@@ -80,7 +131,7 @@ class User extends Component {
             successfulSnackBarOpen: false,
             errorSnackBarOpen: false
         })
-        addDrinkByUsername(this.props.location.pathname.substring(6), drinkTypeId)
+        addDrinkByUsername(this.props.location.pathname.substring(6), drinkTypeId, this.state.timeDelta)
             .then((res) => {
                 if (res.status === 200) {
                     this.setState({
@@ -106,6 +157,12 @@ class User extends Component {
     handledrinkNameChange = (e) => {
         this.setState({
             drinkName: e.target.value
+        })
+    }
+
+    handleDrinkTimeDeltaChange = (e) => {
+        this.setState({
+            timeDelta: e.target.value
         })
     }
 
@@ -151,7 +208,32 @@ class User extends Component {
                         {this.state.keysSorted.map(key => {
                             return <p key={key}>{key}: {this.state.drinkMap[key]}</p>
                         })}
+                        <form className={classes.container} noValidate autoComplete="off">
+                            <TextField
+                                fullWidth
+                                id="filled-select-timeDelta"
+                                select
+                                label="Select time for the drink"
+                                className={classes.textField}
+                                value={this.state.timeDelta}
+                                onChange={this.handleDrinkTimeDeltaChange}
+                                SelectProps={{
+                                    MenuProps: {
+                                        className: classes.menu,
+                                    },
+                                }}
+                                margin="dense"
+                                variant="filled"
+                            >
+                                {timeDeltas.map(option => (
+                                    <MenuItem key={option.value} value={option.value}>
+                                        {option.label}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
+                        </form>
 
+                        <h4>Add a new drink</h4>
                         {this.state.drinkTypes.map(drinkType => {
                             return <Button
                                 key={drinkType._id}
@@ -165,6 +247,7 @@ class User extends Component {
 
                     </Grid>
                 </div>
+                <h4>Add a new custom drink</h4>
                 <form className={classes.container} >
                     <TextField
                         fullWidth
