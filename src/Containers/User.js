@@ -69,6 +69,7 @@ class User extends Component {
                     username: res.data.username,
                     gender: res.data.gender,
                     konni: res.data.konni,
+                    keysSorted: res.data.keysSorted,
                     drinkMap: res.data.drinkMap
                 })
             })
