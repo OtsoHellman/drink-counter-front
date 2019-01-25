@@ -25,7 +25,7 @@ import {
   YAxis,
   HorizontalGridLines,
   VerticalGridLines,
-  LineSeries,
+  LineMarkSeries,
   DiscreteColorLegend,
   Hint,
   XAxis
@@ -44,14 +44,15 @@ class LineChart extends Component {
   render() {
 
     return (
-        <div className="App">
+        <div className="LineChart">
           <FlexibleWidthXYPlot height={500} xType="time">
             <HorizontalGridLines />
             <VerticalGridLines />
             <XAxis />
             <YAxis />
             {this.props.timestamps.map(d => {
-              return (<LineSeries
+              return (<LineMarkSeries
+                size='2'
                 key={d.username}
                 data={d.graphData}
                 label={d.username}
