@@ -58,6 +58,7 @@ class FullWidthTabs extends React.Component {
                     fullWidth
                 >
                     <Tab value="/" label="Home" component={NavLink} to="/" />
+                    <Tab value="/myPage" label="My page" component={NavLink}  to="/myPage" />
                     <Tab value="/list" label="Users" component={NavLink} to="/list" />
                 </Tabs>
             </AppBar>

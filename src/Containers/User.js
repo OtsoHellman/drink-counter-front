@@ -10,7 +10,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 import { getUserData, addDrinkByUsername, getDrinkTypes, addDrinkType } from '../utils/helpers';
 
-
 const styles = theme => ({
     container: {
         display: 'flex',
@@ -95,7 +94,8 @@ class User extends Component {
             drinkMap: {},
             keysSorted: [],
             drinkTypes: [],
-            timeDelta: 0
+            timeDelta: 0,
+            myPage: true
         }
     }
 
@@ -113,17 +113,36 @@ class User extends Component {
             })
     }
 
+    getUserName = () => {
+        const path = this.props.location.pathname.split('/').filter(x => x)
+        if (path[0] === "user" && path.length > 1) {
+            return path[1]
+        } else if (path[0] === "myPage") {
+            return this.props.cookies.get("username")
+        } else {
+            window.location.assign("/")
+        }
+    }
+
     getUserData = () => {
-        getUserData(this.props.location.pathname.substring(6))
+        getUserData(this.getUserName())
             .then((res) => {
                 this.setState({
                     username: res.data.username,
                     gender: res.data.gender,
                     konni: res.data.konni,
                     keysSorted: res.data.keysSorted,
-                    drinkMap: res.data.drinkMap
+                    drinkMap: res.data.drinkMap,
+                    myPage: this.props.cookies.get("username") === res.data.username ? true : false
                 })
             })
+    }
+
+    addUserAsFavourite = () => {
+        this.props.cookies.set('username', this.state.username, { path: '/' })
+        this.setState({
+            myPage: true
+        })
     }
 
     addDrink = (drinkTypeId) => {
@@ -201,7 +220,18 @@ class User extends Component {
             <div>
                 <div>
                     <Grid item xs={12}>
-                        <Paper className={'userTitle'}><h2>{this.state.username}</h2></Paper>
+                        <Paper className={'userTitle'}>
+                            <h2>{this.state.username}</h2>
+                        </Paper>
+                        {this.state.myPage ? '' : <Button
+                            key={`${this.state.username}-favourite`}
+                            variant="contained"
+                            style={{ backgroundColor: "#ffbb02" }}
+                            className={classes.button}
+                            onClick={() => this.addUserAsFavourite()}>
+                            Set as default user
+                            </Button>
+                        }
                         <p>Gender: {this.state.gender}</p>
                         <p>Könni: {this.state.konni.toFixed(2)}</p>
                         {this.state.keysSorted.length <= 0 ? '' : <h3>Favourite drinks:</h3>}
