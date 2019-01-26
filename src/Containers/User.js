@@ -229,7 +229,7 @@ class User extends Component {
                             style={{ backgroundColor: "#ffbb02" }}
                             className={classes.button}
                             onClick={() => this.addUserAsFavourite()}>
-                            Set as default user
+                            Set as my user
                             </Button>
                         }
                         <p>Gender: {this.state.gender}</p>
