@@ -139,7 +139,10 @@ class User extends Component {
     }
 
     addUserAsFavourite = () => {
-        this.props.cookies.set('username', this.state.username, { path: '/' })
+        this.props.cookies.set('username', this.state.username, { 
+            path: '/',
+            maxAge: 365*24*3600
+        })
         this.setState({
             myPage: true
         })
