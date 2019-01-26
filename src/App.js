@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
     Route,
-    NavLink,
     BrowserRouter
 } from "react-router-dom";
 import Home from './Containers/Home'

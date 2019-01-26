@@ -1,14 +1,14 @@
 .App {
   text-align: center;
-  margin-top: 48px;
+  margin-top: 55px;
 }
 
 .App-link {
   color: #61dafb;
 }
 
-.chart-container {
-  display:inline-block;
+.chart {
+  touch-action: manipulation;
 }
 
 li.front-page-li{

@@ -1,30 +1,31 @@
 import React, { Component } from 'react';
 import 'react-vis/dist/style.css';
-import {
-    XYPlot,
-    VerticalBarSeries,
-    VerticalGridLines,
-    HorizontalGridLines,
-    XAxis,
-    YAxis
-} from 'react-vis';
 import '../App.css';
 import socketIOClient from "socket.io-client";
 
-const URL = 'http://3.122.133.98:3002'
+import { API_URL } from '../config';
+import Dashboard from "../Components/Dashboard";
+import LineChart from "../Components/LineChart";
+
 let socket;
 
 class Home extends Component {
 
     constructor() {
         super()
-        this.state = {}
+        this.state = {
+            timestamps: [],
+            data: []
+        }
     }
 
     componentDidMount() {
-        socket = socketIOClient(URL);
+        socket = socketIOClient(API_URL);
         socket.on("allWithKonni", res => {
-            this.setState({ data: res.data })
+            this.setState({
+                data: res.data,
+                timestamps: res.timestamps
+            })
         });
     }
 
@@ -34,24 +35,9 @@ class Home extends Component {
 
     render() {
         return (
-            <div className="App">
-                <div className="chart-container">
-                    <XYPlot
-                        xType="ordinal"
-                        stackBy="y"
-                        width={300}
-                        height={300}
-                    >
-                        <VerticalGridLines />
-                        <HorizontalGridLines />
-                        <XAxis />
-                        <YAxis />
-                        <VerticalBarSeries
-                            color="#12939A"
-                            data={this.state.data}
-                        />
-                    </XYPlot>
-                </div>
+            <div>
+                <Dashboard data={this.state.data} />
+                <LineChart timestamps={this.state.timestamps} />
             </div>
         );
     }
