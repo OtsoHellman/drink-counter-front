@@ -153,7 +153,7 @@ class User extends Component {
             successfulSnackBarOpen: false,
             errorSnackBarOpen: false
         })
-        addDrinkByUsername(this.props.location.pathname.substring(6), drinkTypeId, this.state.timeDelta)
+        addDrinkByUsername(this.state.username, drinkTypeId, this.state.timeDelta)
             .then((res) => {
                 if (res.status === 200) {
                     this.setState({
