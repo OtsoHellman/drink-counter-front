@@ -14,7 +14,7 @@ class Dashboard extends Component {
 
     render() {
         return (
-            <div className="App">
+            <div className="chart">
                 <FlexibleWidthXYPlot
                     xType="ordinal"
                     stackBy="y"

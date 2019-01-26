@@ -44,7 +44,7 @@ class LineChart extends Component {
   render() {
 
     return (
-        <div className="LineChart">
+        <div className="chart">
           <FlexibleWidthXYPlot height={500} xType="time">
             <HorizontalGridLines />
             <VerticalGridLines />

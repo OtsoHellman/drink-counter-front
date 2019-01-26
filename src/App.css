@@ -7,6 +7,10 @@
   color: #61dafb;
 }
 
+.chart {
+  touch-action: manipulation;
+}
+
 li.front-page-li{
   background-color: cornsilk;
   border: 1px solid black;
