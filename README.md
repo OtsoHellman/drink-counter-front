@@ -1,6 +1,6 @@
 # Drink Counter 2.0
 
-Live (mobile preferred): https://konni.munax.club/
+Live (mobile preferred): https://konni.club/
 
 Backend: https://github.com/OtsoHellman/drink-counter-back
 
